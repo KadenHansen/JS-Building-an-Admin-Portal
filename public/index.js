@@ -1,8 +1,7 @@
 async function main() {
-
+    changeBook()
     let response = await fetch('http://localhost:3001/listBooks')
     let books = await response.json()
-
     books.forEach(renderBook)
 }
 
@@ -23,6 +22,19 @@ function renderBook(book) {
             </div>
         </div>
     `
+}
+
+async function changeBook(){
+    await fetch("http://localhost:3001/updateBook", {
+    method: "PATCH",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        "id": 3,
+        "title": "Legends of Arathrae"
+    })
+    })
 }
 
 main()
